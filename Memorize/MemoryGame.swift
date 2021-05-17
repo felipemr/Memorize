@@ -84,7 +84,7 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
         
         //MARK: - Timed Bonus
         
-        var timedBonusLimit : TimeInterval = 0
+        var timedBonusLimit : TimeInterval = 10
         
         var lastFaceUpDate: Date?
         var pastFaceUpTime:TimeInterval = 0
@@ -101,14 +101,14 @@ struct MemoryGame<CardContent> where CardContent:Equatable {
             max(0, timedBonusLimit - facedUpTime)
         }
         
-        var bonusPercentagRemaining: Double{
+        var bonusPercentageRemaining: Double{
             (timedBonusLimit > 0 && timedBonusRemainingTime > 0) ? timedBonusRemainingTime/timedBonusLimit : 0
         }
         var hasEarnedBonus: Bool{
             isMatched && timedBonusRemainingTime>0
         }
         var isConsumingBonus: Bool{
-            isFacedUp && !hasEarnedBonus
+            isFacedUp && !isMatched && timedBonusRemainingTime>0
         }
         private mutating func startUsingTimedBonus(){
             if isConsumingBonus, lastFaceUpDate == nil{

@@ -46,19 +46,48 @@ struct  CardView: View {
     
     var body: some View{
         GeometryReader{ geometry in
-            if !card.isMatched || card.isFacedUp{
-                ZStack() {
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 90-90), clockwise: true)
-                        .fill(color).padding(5).opacity(0.4)
-                    Text(card.content)
-                        .font(cardFont(size: geometry.size))
-                        .rotationEffect(Angle(degrees: card.isMatched ? 360 : 0))
-                        .animation(card.isMatched ? Animation.linear(duration: 1.3).repeatForever(autoreverses: false) : .default)
+            makeBody(for: geometry)
+        }
+    }
+    
+    @State var animatedTimedBonus : Double = 0
+    
+    private func startTimedBonusAnimation(){
+        animatedTimedBonus = card.bonusPercentageRemaining
+        withAnimation(.linear(duration: card.timedBonusRemainingTime)){
+            animatedTimedBonus = 0
+        }
+    }
+
+    @ViewBuilder
+    private func makeBody(for geometry: GeometryProxy) -> some View {
+        if !card.isMatched || card.isFacedUp{
+            ZStack() {
+                Group{
+                    if card.isConsumingBonus{
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: -animatedTimedBonus*360-90), clockwise: true)
+                            .fill(color)
+                            .onAppear{
+                                self.startTimedBonusAnimation()
+                            }
+                    }
+                    else{
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: -card.bonusPercentageRemaining*360-90), clockwise: true)
+                            .fill(color)
+                    }
                 }
-                .cardify(isFacedUp: card.isFacedUp, color: color)
-                .transition(.scale)
+                .padding(5).opacity(0.4)
+
                 
+                    
+                Text(card.content)
+                    .font(cardFont(size: geometry.size))
+                    .rotationEffect(Angle(degrees: card.isMatched ? 360 : 0))
+                    .animation(card.isMatched ? Animation.linear(duration: 1.3).repeatForever(autoreverses: false) : .default)
             }
+            .cardify(isFacedUp: card.isFacedUp, color: color)
+            .transition(.scale)
+            
         }
     }
     
