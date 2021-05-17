@@ -15,10 +15,9 @@ struct GameView: View {
             VStack{
                 HStack{
                     Button("New Game") {
-                        withAnimation(.easeInOut(duration: 2)) {
+                        withAnimation(.easeInOut(duration: 1)) {
                             emojiGame.newGame()
                         }
-                        
                     }
                     Text(emojiGame.actualTheme.name)
                     Text("Score: \(emojiGame.gameScore)")
@@ -58,6 +57,7 @@ struct  CardView: View {
                 }
                 .cardify(isFacedUp: card.isFacedUp, color: color)
                 .transition(.scale)
+                
             }
         }
     }

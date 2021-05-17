@@ -7,9 +7,23 @@
 
 import SwiftUI
 
-struct Cardify: ViewModifier {
-    var isFacedUp: Bool
+struct Cardify: AnimatableModifier {
+    var rotation: Double
     let color:Color
+    
+    var isFacedUp: Bool{
+        rotation<90
+    }
+    
+    var animatableData: Double{
+        get {return rotation}
+        set {rotation = newValue}
+    }
+    
+    init(isFacedUp: Bool, color: Color){
+        rotation = isFacedUp ? 0 : 180
+        self.color = color
+    }
     
     private let cornerRadius: CGFloat = 25.0
     private let lineWidth: CGFloat = 3
@@ -27,6 +41,10 @@ struct Cardify: ViewModifier {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .circular).fill(color)
             }
         }
+        .rotation3DEffect(
+            Angle(degrees: rotation),
+            axis: (x: 0.0, y: 1.0, z: 0.0)
+        )
     }
     
 }
