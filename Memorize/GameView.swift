@@ -15,13 +15,20 @@ struct GameView: View {
             VStack{
                 HStack{
                     Button("New Game") {
-                        emojiGame.newGame()
+                        withAnimation(.easeInOut(duration: 2)) {
+                            emojiGame.newGame()
+                        }
+                        
                     }
                     Text(emojiGame.actualTheme.name)
                     Text("Score: \(emojiGame.gameScore)")
                 }
                 Grid(emojiGame.cards){card in
-                    CardView(color: emojiGame.actualTheme.cardColor, card: card).onTapGesture {emojiGame.choose(card: card)}
+                    CardView(color: emojiGame.actualTheme.cardColor, card: card).onTapGesture {
+                        withAnimation(.linear(duration: 2)) {
+                            emojiGame.choose(card: card)
+                        }
+                    }
                         .padding(5)
                         .aspectRatio(2/3, contentMode: .fit)
                 }
@@ -46,8 +53,11 @@ struct  CardView: View {
                         .fill(color).padding(5).opacity(0.4)
                     Text(card.content)
                         .font(cardFont(size: geometry.size))
+                        .rotationEffect(Angle(degrees: card.isMatched ? 360 : 0))
+                        .animation(card.isMatched ? Animation.linear(duration: 1.3).repeatForever(autoreverses: false) : .default)
                 }
                 .cardify(isFacedUp: card.isFacedUp, color: color)
+                .transition(.scale)
             }
         }
     }
