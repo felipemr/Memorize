@@ -46,7 +46,8 @@ struct  CardView: View {
                 if card.isFacedUp {
                     RoundedRectangle(cornerRadius: cornerRadius, style: .circular).fill(Color.white)
                     RoundedRectangle(cornerRadius: cornerRadius, style: .circular).stroke(lineWidth: lineWidth).fill(color)
-                    Circle().fill(color).padding(5).opacity(0.4)
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 90-90), clockwise: true)
+                        .fill(color).padding(5).opacity(0.4)
                     Text(card.content)
                 }
                 else {

@@ -18,6 +18,7 @@
 		DED81A77263F3C3600708D32 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED81A76263F3C3600708D32 /* Array+Identifiable.swift */; };
 		DED81A79263F5DB300708D32 /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED81A78263F5DB300708D32 /* Array+Only.swift */; };
 		DED81A7B26434B9000708D32 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED81A7A26434B9000708D32 /* Theme.swift */; };
+		DED81A7D2651D0F600708D32 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED81A7C2651D0F600708D32 /* Pie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		DED81A76263F3C3600708D32 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		DED81A78263F5DB300708D32 /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
 		DED81A7A26434B9000708D32 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DED81A7C2651D0F600708D32 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		DE2190C12638F94400630DC4 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				DED81A7C2651D0F600708D32 /* Pie.swift */,
 				DE2190C22638F94400630DC4 /* MemorizeApp.swift */,
 				DE2190C42638F94400630DC4 /* GameView.swift */,
 				DED81A72263F2E5200708D32 /* Grid.swift */,
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DED81A7D2651D0F600708D32 /* Pie.swift in Sources */,
 				DED81A7B26434B9000708D32 /* Theme.swift in Sources */,
 				DED81A6F263A711400708D32 /* MemoryGame.swift in Sources */,
 				DE2190C52638F94400630DC4 /* GameView.swift in Sources */,
