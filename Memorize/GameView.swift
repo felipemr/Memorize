@@ -15,7 +15,7 @@ struct GameView: View {
             VStack{
                 HStack{
                     Button("New Game") {
-                        withAnimation(.easeInOut(duration: 1)) {
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             emojiGame.newGame()
                         }
                     }
@@ -24,7 +24,7 @@ struct GameView: View {
                 }
                 Grid(emojiGame.cards){card in
                     CardView(color: emojiGame.actualTheme.cardColor, card: card).onTapGesture {
-                        withAnimation(.linear(duration: 2)) {
+                        withAnimation(.linear(duration: 1)) {
                             emojiGame.choose(card: card)
                         }
                     }
