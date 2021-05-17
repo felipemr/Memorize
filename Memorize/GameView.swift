@@ -23,6 +23,7 @@ struct GameView: View {
                 Grid(emojiGame.cards){card in
                     CardView(color: emojiGame.actualTheme.cardColor, card: card).onTapGesture {emojiGame.choose(card: card)}
                         .padding(5)
+                        .aspectRatio(2/3, contentMode: .fit)
                 }
             }
     }
@@ -30,11 +31,8 @@ struct GameView: View {
 
 struct  CardView: View {
     //MARK: - Controls
-    private let cornerRadius: CGFloat = 25.0
-    private let lineWidth: CGFloat = 3
-    private let fontFactor: CGFloat = 0.5
     let color:Color
-    // font: Font
+    private let fontFactor: CGFloat = 0.5
     
     //MARK: - View variables
     var card: MemoryGame<String>.Card
@@ -42,23 +40,15 @@ struct  CardView: View {
     
     var body: some View{
         GeometryReader{ geometry in
-            ZStack() {
-                if card.isFacedUp {
-                    RoundedRectangle(cornerRadius: cornerRadius, style: .circular).fill(Color.white)
-                    RoundedRectangle(cornerRadius: cornerRadius, style: .circular).stroke(lineWidth: lineWidth).fill(color)
+            if !card.isMatched || card.isFacedUp{
+                ZStack() {
                     Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 90-90), clockwise: true)
                         .fill(color).padding(5).opacity(0.4)
                     Text(card.content)
+                        .font(cardFont(size: geometry.size))
                 }
-                else {
-                    if !card.isMatched{
-                        RoundedRectangle(cornerRadius: cornerRadius, style: .circular).fill(color)
-                    }
-                }
+                .cardify(isFacedUp: card.isFacedUp, color: color)
             }
-            .aspectRatio(2/3, contentMode: .fit)
-            .font(cardFont(size: geometry.size))
-            
         }
     }
     
